@@ -1,0 +1,42 @@
+PWD
+pwd
+ls
+ls -l
+cd Documents
+pwd
+ls
+cd 1_Basic_Training
+clear
+cat > test.txt
+head -n 1 test.txt
+tail -n 1 test.txt
+cat test.txt
+rm test.txt
+mkdir Trash
+ls
+mv test.txt Trash/
+ls
+cd Trash/
+ls
+cd 1_Basic_Training
+cd ..
+ls
+ls ../0_Original_Data/watson*
+ls -lh ../0_Original_Data/watson*
+head ../0_Original_Data/watson*docx
+head ../0_Original_Data/watson*pdf
+head ../0_Original_Data/watson*txt
+cd
+mkdir bin
+ls
+mv Downloads/IGV_Linux_2.10.2_WithJava.zip bin
+cd bin
+ls
+unzip IGV_Linux_2.10.2_WithJava.zip
+ls -lh IGV_Linux_2.10.2
+igv.sh
+which head
+which igv.sh
+export PATH="$PATH:/home/manager/bin/IGV_Linux_2.10.2"
+which igv.sh
+
