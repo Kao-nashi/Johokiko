@@ -1,0 +1,40 @@
+##短鎖シークエンサーを用いた疾患ゲノム解析の概要を学びます。
+#ファイルサイズを確認します。
+cd
+cd Documents/2_Mutation_Search
+ls -lh
+
+#fastqファイルの様式を学びます。
+head Tomita_20160714_test.fq
+
+#行数を確認方法を学びます。
+wc -l Tomita_20160714_test.fq
+
+#リード数の確認方法を学びます。
+wc -k Tomita_20160714_test.fq | awk '{print $1/4}'
+
+#ファイル中の文字列を検索方法を学びます。
+cat Tomita_20160714_test.fq | grep ACGT
+
+#ヒトゲノム配列中のCGの出現頻度を確認方法をを学びます。
+cat Tomita_20160714_test.fq | grep CG
+cat Tomita_20160714_test.fq | grep GC
+cat Tomita_20160714_test.fq | grep GG
+cat Tomita_20160714_test.fq | grep CC
+
+#samファイルの様式を学びます。
+less Tomita_20160714_test.sam
+
+#vcfファイルの様式を学びます。
+less Tomita_20160714_raw.vcf
+
+#snpEff の出力ファイルの様式を学びます。
+head Tomita_20160714_eff.txt
+
+#awkを用いてファイル形式の変更方法を学びます。
+grep NON_SYNO Tomita_20160714_eff.txt|grep -v WARNING |awk -v OFS='\t' '{print $1,$2,$3,$4,$6,$10,$15,$16,$18,$21}'|uniq
+
+#IGVを用いた変異の目視方法を学びます。
+igv.sh
+
+
