@@ -1,17 +1,35 @@
+#コマンドが大文字小文字を区別することを学びます。
 PWD
 pwd
+
+#基本コマンドを学びます。
+#ディレクトリ内にあるファイルの表示方法を学びます。
 ls
 ls -l
+
+#ディレクトリ間の移動について学びます。
 cd Documents
 pwd
 ls
 cd 1_Basic_Training
+
+#端末の表示内容を消す方法を学びます。
 clear
+
+#基本的なテキスト操作を学びます。
 cat > test.txt
 head -n 1 test.txt
 tail -n 1 test.txt
 cat test.txt
+
+#ファイルの消去方法を学びます。
 rm test.txt
+
+#ディレクトリの作成方法を学びます。
+mkdir Trash
+
+#ファイルの
+mkdir Trash移動
 mkdir Trash
 ls
 mv test.txt Trash/
