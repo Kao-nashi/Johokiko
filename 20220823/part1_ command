@@ -28,22 +28,26 @@ rm test.txt
 #ディレクトリの作成方法を学びます。
 mkdir Trash
 
-#ファイルの
-mkdir Trash移動
-mkdir Trash
+#ファイルの移動方法を学びます。
 ls
 mv test.txt Trash/
 ls
 cd Trash/
 ls
+
+#ディレクトリ間の関係性を学びます。
 cd 1_Basic_Training
 cd ..
 ls
+
+#バイナリとテキストの違いを学びます。
 ls ../0_Original_Data/watson*
 ls -lh ../0_Original_Data/watson*
 head ../0_Original_Data/watson*docx
 head ../0_Original_Data/watson*pdf
 head ../0_Original_Data/watson*txt
+
+#Linuxソフトウェアのインストール方法を学びます。
 cd
 mkdir bin
 ls
