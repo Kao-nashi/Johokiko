@@ -5,5 +5,6 @@
 
 # 参考URL
 - [dbSNP](https://www.ncbi.nlm.nih.gov/SNP/)
--- [rs334](https://www.ncbi.nlm.nih.gov/snp/rs334)
+  - [rs334](https://www.ncbi.nlm.nih.gov/snp/rs334)
 - [OMIM: Online Mendelian Inheritance in Man](http://omim.org/)
+  - [rs334]()
