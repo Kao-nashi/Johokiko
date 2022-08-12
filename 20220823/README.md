@@ -7,4 +7,4 @@
 - [dbSNP](https://www.ncbi.nlm.nih.gov/SNP/)
   - [rs334](https://www.ncbi.nlm.nih.gov/snp/rs334)
 - [OMIM: Online Mendelian Inheritance in Man](http://omim.org/)
-  - [rs334]()
+  - [rs334](https://omim.org/entry/141900?search=rs334&highlight=rs334)
