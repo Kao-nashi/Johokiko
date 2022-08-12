@@ -1,1 +1,3 @@
-# Johokiko
+情報機構主催のセミナーの資料置き場です。
+
+[情報機構ホームページ](https://johokiko.co.jp/)
