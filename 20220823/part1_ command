@@ -13,6 +13,7 @@ pwd
 ls
 cd 1_Basic_Training
 
+
 #端末の表示内容を消す方法を学びます。
 clear
 
