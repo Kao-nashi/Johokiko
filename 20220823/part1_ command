@@ -48,12 +48,22 @@ cd 1_Basic_Training
 cd ..
 ls
 
+#正規表現について学びます。
+ls
+mv t* T*
+ls
+ls */*
+
 #バイナリファイルとテキストファイルの違いを学びます。
 ls ../0_Original_Data/watson*
 ls -lh ../0_Original_Data/watson*
 head ../0_Original_Data/watson*docx
 head ../0_Original_Data/watson*pdf
 head ../0_Original_Data/watson*txt
+
+#文字列検索の方法を学びます。
+grep test */*
+grep -a D.N.A ../0_Original_Data/watson*
 
 #Linuxソフトウェアのインストール方法を学びます。
 cd
