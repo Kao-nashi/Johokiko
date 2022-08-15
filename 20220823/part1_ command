@@ -32,9 +32,12 @@ rm test.txt
 
 #ディレクトリの作成方法を学びます。
 mkdir Trash
+ls
+
+#「基本的なテキスト操作を学びます」を参考に再度 test.txt を作ってください。
+ls
 
 #ファイルの移動方法を学びます。
-ls
 mv test.txt Trash/
 ls
 cd Trash/
