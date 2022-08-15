@@ -40,7 +40,7 @@ cd 1_Basic_Training
 cd ..
 ls
 
-#バイナリとテキストの違いを学びます。
+#バイナリファイルとテキストファイルの違いを学びます。
 ls ../0_Original_Data/watson*
 ls -lh ../0_Original_Data/watson*
 head ../0_Original_Data/watson*docx
