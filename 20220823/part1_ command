@@ -19,6 +19,10 @@ clear
 
 #基本的なテキスト操作を学びます。
 cat > test.txt
+test1
+test2
+test3
+test4
 head -n 1 test.txt
 tail -n 1 test.txt
 cat test.txt
