@@ -14,7 +14,9 @@ wc -l Tomita_20160714_test.fq
 wc -k Tomita_20160714_test.fq | awk '{print $1/4}'
 
 #ファイル中の文字列を検索方法を学びます。
-cat Tomita_20160714_test.fq | grep ACGT
+cat Tomita_20160714_test.fq | grep AT
+cat Tomita_20160714_test.fq | grep GG
+cat Tomita_20160714_test.fq | grep CG
 
 #ヒトゲノム配列中のCGの出現頻度を確認方法をを学びます。
 cat Tomita_20160714_test.fq | grep CG
