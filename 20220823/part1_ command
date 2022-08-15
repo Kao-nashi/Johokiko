@@ -38,9 +38,9 @@ ls
 ls
 
 #ファイルの移動方法を学びます。
-mv test.txt Trash/
+mv test.txt Trash
 ls
-cd Trash/
+cd Trash
 ls
 
 #ディレクトリ間の関係性を学びます。
