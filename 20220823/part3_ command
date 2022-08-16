@@ -1,0 +1,106 @@
+#---------------
+# データ確認
+#---------------
+cd /home/manager/Documents/4_Devil/fastq/tumor1
+ll
+
+# 圧縮ファイルの表示
+zless tumor1.fastq.gz
+q
+
+#---------------
+# kallisto実行
+#---------------
+cd /home/manager/Documents/4_Devil/kallisto_linux-v0.43.1
+./kallisto
+
+# kallistoインデックス
+./kallisto index
+
+# kallistoマッピング・定量
+./kallisto quant
+
+# workへ移動
+cd /home/manager/Documents/4_Devil/work
+
+# １サンプルマッピング・定量
+../kallisto_linux-v0.43.1/kallisto quant -i ../reference/GCF_000189315.1_Devil_ref_v7.0_index -o tumor1 --bootstrap-samples=100 --threads=2 --single -l200 -s20 ../fastq/tumor1/tumor1.fastq.gz
+
+# 結果の確認
+ls
+ls tumor1
+
+# 残り５サンプルの処理
+for sample in tumor2 tumor3 testis1 testis2 testis3;do
+../kallisto_linux-v0.43.1/kallisto quant -i ../reference/GCF_000189315.1_Devil_ref_v7.0_index -o ${sample} --bootstrap-samples=100 --threads=2 --single -l200 -s20 ../fastq/${sample}/${sample}.fastq.gz
+done
+
+# 結果の確認
+ls
+find
+less tumor1/abundance.tsv
+q
+
+#---------------
+# sleuth
+#---------------
+# サンプル情報の確認
+cd /home/manager/Documents/4_Devil
+cat sample.txt
+
+# R起動
+cd /home/manager/Documents/4_Devil/work
+R
+
+# サンプル情報読み込み
+s2c=read.table("../sample.txt",header=T,stringsAsFactors=F)
+s2c
+
+# sleuthパッケージ読み込み
+library(sleuth)
+
+# kallisto結果読み込み
+so=sleuth_prep(s2c,extra_bootstrap_summary=T)
+head(kallisto_table(so),20)
+
+# 発現量比較（LRT）
+so=sleuth_fit(so,~condition,'full')
+lrt=sleuth_fit(so,~1,'reduced')
+lrt=sleuth_lrt(lrt,'reduced','full')
+lrt_table=sleuth_results(lrt,'reduced:full','lrt',show_all=T)
+
+# 結果確認
+head(lrt_table,10)
+
+# 遺伝子シンボルの読み込み、対応付け
+id2name=read.table("../reference/targetid2genename.txt",header=T,sep="\t")
+head(id2name)
+lrt_table2=merge(lrt_table,id2name,by="target_id")
+head(lrt_table2)
+
+# sleuth結果の整形
+lrt_table3=lrt_table2[order(lrt_table2$qval),]
+head(lrt_table3,10)
+
+# 作図
+pdf("mpz.pdf")
+plot_bootstrap(lrt,"XM_003769636.2",units="est_counts",color_by="condition")
+dev.off()
+
+# 作図２
+wt=sleuth_wt(so,'conditiontumor')
+wt_table=sleuth_results(wt,'conditiontumor')
+head(wt_table)
+pdf("volcanoplot.pdf")
+plot_volcano(wt,'conditiontumor','wt')
+dev.off()
+
+# ２次解析
+sig=subset(lrt_table3,qval<=0.05,geneName)
+sig
+write.table(sig,"sigGenes.txt",row.names=F,col.names=F,quote=F)
+
+# Rの終了
+q()
+n
+
