@@ -1,0 +1,134 @@
+# フォルダ=ディレクトリに入る
+cd /home/manager/Documents/5_GWAS/Work
+ls 
+
+#バイナリーファイルの確認(※ head　Binary1.bedをすると文字化けします!!)
+head　Binary1.bim
+head　Binary1.fam
+
+# Plinkを動かす
+../plink_linux_x86_64_20210606/plink
+
+# 新しいバイナリーファイル（Binary2）を作成
+../plink_linux_x86_64_20210606/plink --bfile Binary1 --make-bed --mind 0.01 --geno 0.05 --maf 0.01 --hwe 0.001 --out Binary2
+ls
+
+# 血縁度によるQC （PI＿HATの算出）
+../plink_linux_x86_64_20210606/plink --bfile Binary2 --genome --out NIBD
+ls
+head NIBD.genome
+
+
+# Rを立ち上げてPI＿HAT解析結果を確認する。
+R
+
+# NIBD.genome　をRに読み込む。
+ibd <- read.table("NIBD.genome",header=T) 
+range(ibd$PI_HAT)
+
+# Rを終了する
+q()
+n
+
+# 解析データを主成分分析する
+../plink_linux_x86_64_20210606/plink --bfile Binary2 --pca --out PCA
+ls 
+
+# Rを立ち上げてPCA解析結果を確認する。
+R
+
+# PCA.eigenvecを読み込み、中身を確認する。
+df <- read.table("PCA.eigenvec")
+head(df)
+
+# 散布図を描いてみる
+png("PCA.png")
+plot(df$V3, df$V4) 
+dev.off()
+
+# 補足1）PCAカラーバージョンの出力。 WorkディレクトリのPCAcolor.txt をRに読み込む。
+df1 <- read.table("PCAcolor.txt", header=T)
+png("PCAcolor.png")       
+plot(df1$PC1, df1$PC2, col=c(CHS="brown", KHV="darkgreen", CHB="blue", CDX="chartreuse", JPT="cyan")[df1$ethnic])
+dev.off()
+
+# Rを終了する
+q()
+n
+
+# awkを使って主成分分析の結果をテキストに書き出す。
+awk '{print $1, $2, $3, $4}' PCA.eigenvec > pca.txt
+ls
+
+# R を立ち上げ、pca.txtの結果をDemoBMI.txtを連結する。
+R
+
+# まず df1にpca.txtを読み込む。ヘッダーをつけないようにする。
+df1 <- read.table("pca.txt", header=F)
+head(df1)
+
+# pca.txtのヘッダーの名前を書き換える
+names(df1) <- c("FID", "IID", "PC1", "PC2")
+head(df1)
+
+# DemoBMI.txtを「df2」として読み込む。ヘッダーをつける。
+df2 <- read.table("DemoBMI.txt", header=T)
+head(df2)
+
+# 二つのテキストファイルを連結し、「df3」として読み込み、確認。
+df3 <- merge(df2, df1)
+head(df3)
+
+# DemoBMI_PCAmerged.txtという名前で書き出す。
+write.table(df3, "DemoBMI_PCAmerged.txt", quote=F, row.names=F)
+
+# Rを終了する
+q()
+n
+
+# GWASの線形回帰計算
+../plink_linux_x86_64_20210606/plink --bfile Binary2 --pheno DemoBMI_PCAmerged.txt --pheno-name DemoBMI --covar DemoBMI_PCAmerged.txt --covar-name AGE, SEX, PC1, PC2 --allow-no-sex --linear hide-covar --out BMI.GWAS
+ls
+
+# R を立ち上げ、library(qqman)を呼び出す。
+R
+library(qqman)
+
+# BMI.GWAS.assoc.linearを読み込む
+df <- read.table("BMI.GWAS.assoc.linear", header=T)　　
+head(df)
+
+# qqプロットを描出する
+png("QQplot.png")
+qq(df$P)
+dev.off()
+
+# マンハッタンプロットを描出し、各染色体で検出されたSNPのp値を見る。
+png("manhattanplot.png")
+manhattan(df, chr="CHR", bp="BP", p="P", snp="SNP", ylim=c(0,-log10(5e-15)))
+dev.off()
+
+# 解析で得られた有意なSNPを「df2」に抽出する。
+df2 <- df[df$P<5e-8,]
+df2
+
+# 「df2」リストを表（テキストファイル）に書き出す
+write.table(df2, "interestSNP.txt", quote=F, row.names=F)
+
+# Rを終了する
+q()
+n 
+
+#　データベースで：The Single Nucleotide Polymorphism Database：dbSNP
+https://www.ncbi.nlm.nih.gov/snp
+
+# データベース：Ensembl Variant Effect Predictor: VEP
+# VEP_GRCh37用
+http://grch37.ensembl.org/Homo_sapiens/Tools/VEP
+# VEP_GRCh38用
+https://www.ensembl.org/Tools/VEP
+
+
+
+
+
