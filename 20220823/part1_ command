@@ -56,8 +56,8 @@ sort test.txt > test_sorted.txt
 uniq sort test.txt
 
 #複数のコマンドを組み合わせる方法を学びます。
-
-
+sort test.txt | uniq > test_sorted_uniq.txt
+cat test_sorted_uniq.txt
 
 #ファイルの移動方法を学びます。
 mv test.txt Trash
