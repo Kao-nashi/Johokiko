@@ -20,22 +20,6 @@ clear
 #基本的なテキスト操作を学びます。
 cat > test.txt
 test1
-test2
-test3
-test4
-head -n 1 test.txt
-tail -n 1 test.txt
-cat test.txt
-
-#ファイルの消去方法を学びます。
-rm test.txt
-
-#ディレクトリの作成方法を学びます。
-mkdir Trash
-ls
-
-#前述の「基本的なテキスト操作を学びます」を参考に再度下記のような test.txt を作ってください。
-test1
 test3
 test3
 test5
@@ -43,8 +27,6 @@ test4
 test3
 test2
 
-#ファイルの確認をします。
-ls
 head -n 1 test.txt
 tail -n 1 test.txt
 cat test.txt
@@ -55,6 +37,7 @@ wc -l test.txt
 #重複エントリーの除去方法を学びます。
 uniq test.txt
 
+
 #データのソート方法を学びます。
 sort test.txt
 sort test.txt > test_sorted.txt
@@ -63,6 +46,14 @@ uniq test_sorted.txt
 #複数のコマンドを組み合わせる方法を学びます。
 sort test.txt | uniq > test_sorted_uniq.txt
 cat test_sorted_uniq.txt
+
+#ファイルの消去方法を学びます。
+rm test_sorted.txt
+ls
+
+#ディレクトリの作成方法を学びます。
+mkdir Trash
+ls
 
 #ファイルの移動方法を学びます。
 mv test.txt Trash
