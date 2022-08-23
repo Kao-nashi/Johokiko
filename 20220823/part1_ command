@@ -13,7 +13,6 @@ pwd
 ls
 cd 1_Basic_Training
 
-
 #端末の表示内容を消す方法を学びます。
 clear
 
@@ -36,7 +35,6 @@ wc -l test.txt
 
 #重複エントリーの除去方法を学びます。
 uniq test.txt
-
 
 #データのソート方法を学びます。
 sort test.txt
@@ -97,4 +95,3 @@ which head
 which igv.sh
 export PATH="$PATH:/home/manager/bin/IGV_Linux_2.10.2"
 which igv.sh
-
