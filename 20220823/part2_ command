@@ -46,5 +46,3 @@ grep NON_SYNO Tomita_20160714_eff.txt|grep -v WARNING |awk -v OFS='\t' '{print $
 
 #IGVを用いた変異の目視方法を学びます。
 igv.sh
-
-
