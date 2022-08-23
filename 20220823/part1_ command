@@ -42,7 +42,12 @@ test5
 test4
 test3
 test2
+
+#ファイルの確認をします。
 ls
+head -n 1 test.txt
+tail -n 1 test.txt
+cat test.txt
 
 #データ量の確認方法を学びます
 wc -l test.txt
@@ -53,7 +58,7 @@ uniq test.txt
 #データのソート方法を学びます。
 sort test.txt
 sort test.txt > test_sorted.txt
-uniq sort test.txt
+uniq test_sorted.txt
 
 #複数のコマンドを組み合わせる方法を学びます。
 sort test.txt | uniq > test_sorted_uniq.txt
