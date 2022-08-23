@@ -34,8 +34,30 @@ rm test.txt
 mkdir Trash
 ls
 
-#前述の「基本的なテキスト操作を学びます」を参考に再度 test.txt を作ってください。
+#前述の「基本的なテキスト操作を学びます」を参考に再度下記のような test.txt を作ってください。
+test1
+test3
+test3
+test5
+test4
+test3
+test2
 ls
+
+#データ量の確認方法を学びます
+wc -l test.txt
+
+#重複エントリーの除去方法を学びます。
+uniq test.txt
+
+#データのソート方法を学びます。
+sort test.txt
+sort test.txt > test_sorted.txt
+uniq sort test.txt
+
+#複数のコマンドを組み合わせる方法を学びます。
+
+
 
 #ファイルの移動方法を学びます。
 mv test.txt Trash
